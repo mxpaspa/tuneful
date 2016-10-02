@@ -13,30 +13,25 @@ class Song(Base):
     id = Column(Integer, primary_key=True)
     song_file_id = Column(Integer, ForeignKey("files.id", nullable=False)
     
-    def as_dictionary(self):
-        song_file_info = session.query(File).filter_by(id =song_file_id).first()
+        def as_dictionary(self):
+            file = session.query(File).filter_by(id =self.song_file_id).first()
         
         return {
             "id": self.id,
-            "file": {
-                "id": 7,
-                "name": "Shady_Grove.mp3"
-                {
+            "file": file.as_dictionary()
         }
-        return post
+        
         
 class File(Base):
     __tablename__ = "files"
 
     id = Column(Integer, primary_key=True)
     song = relationship("Song", backref="song", uselist=False)
+    file_name = Column(String, nullable=False)
     
     def as_dictionary(self):
         return {
             "id": self.id,
-            "file": {self.filename,
-                "id": 7,
-                "name": "Shady_Grove.mp3"
-                {
+            "file_name": self.file_name
         }
-        return post
+        

@@ -55,9 +55,9 @@ def post_song():
     # location header set to the location of the post
     data = json.dumps(song.as_dictionary())
     headers = {"Location": url_for("get_songs", id=song.id)}
-    return Response(json.dumps(data), 200, headers=headers, mimetype="applicaiton/json")
+    return Response(json.dumps(data), 200, headers=headers, mimetype="application/json")
     
-@app.route("/api/songs/<int:id>", methods="PUT"
+@app.route("/api/songs/<int:id>", methods=["PUT"])
 @decorators.accept("application/json")
 @decorators.require("application/json")
 
@@ -70,9 +70,9 @@ def edit_song():
         data = json.dumps({"message": message})
         return Response(data, 404, mimetype="application/json")
         
-data = request.json
+    data = request.json
 
-  # check that the JSON supplied is valid
+    # check that the JSON supplied is valid
     # if not, return a 422 Unprocessable Entity
     try:
         validate(data, song_schema)
@@ -80,7 +80,7 @@ data = request.json
         data = {"message": error.message}
         return Response(json.dumps(data), 422, mimetype="application/json")
         
-    song. = data[""]
+    song = data[""]
     session.commit()
     # return an OK 200, containing the song as JSON with the
     # location header set to the location of the post
